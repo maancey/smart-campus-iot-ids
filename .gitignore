@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large/raw datasets
+data/raw/*.csv
+
+# Generated processed data
+data/processed/*.csv
+
+# Generated models
+models/*.joblib
+models/*.pkl
+models/*.onnx
+
+# Experiment outputs
+results/**/*.tmp
+
+# Python/Jupyter
+.ipynb_checkpoints/
+
+# Secrets
+.env

@@ -1,0 +1,278 @@
+======================================================================
+TRAINING DATASET
+======================================================================
+File: C:\Users\ALTIRHAL TRAVELS\smart-campus-iot-ids\data\raw\UNSW_NB15_training-set.csv
+Rows: 92126
+Columns: 45
+
+Columns:
+  - id
+  - dur
+  - proto
+  - service
+  - state
+  - spkts
+  - dpkts
+  - sbytes
+  - dbytes
+  - rate
+  - sttl
+  - dttl
+  - sload
+  - dload
+  - sloss
+  - dloss
+  - sinpkt
+  - dinpkt
+  - sjit
+  - djit
+  - swin
+  - stcpb
+  - dtcpb
+  - dwin
+  - tcprtt
+  - synack
+  - ackdat
+  - smean
+  - dmean
+  - trans_depth
+  - response_body_len
+  - ct_srv_src
+  - ct_state_ttl
+  - ct_dst_ltm
+  - ct_src_dport_ltm
+  - ct_dst_sport_ltm
+  - ct_dst_src_ltm
+  - is_ftp_login
+  - ct_ftp_cmd
+  - ct_flw_http_mthd
+  - ct_src_ltm
+  - ct_srv_dst
+  - is_sm_ips_ports
+  - attack_cat
+  - label
+
+Data types:
+id                     int64
+dur                  float64
+proto                    str
+service                  str
+state                    str
+spkts                  int64
+dpkts                  int64
+sbytes                 int64
+dbytes                 int64
+rate                 float64
+sttl                   int64
+dttl                   int64
+sload                float64
+dload                float64
+sloss                  int64
+dloss                  int64
+sinpkt               float64
+dinpkt               float64
+sjit                 float64
+djit                 float64
+swin                   int64
+stcpb                  int64
+dtcpb                  int64
+dwin                   int64
+tcprtt               float64
+synack               float64
+ackdat               float64
+smean                  int64
+dmean                  int64
+trans_depth          float64
+response_body_len    float64
+ct_srv_src           float64
+ct_state_ttl         float64
+ct_dst_ltm           float64
+ct_src_dport_ltm     float64
+ct_dst_sport_ltm     float64
+ct_dst_src_ltm       float64
+is_ftp_login         float64
+ct_ftp_cmd           float64
+ct_flw_http_mthd     float64
+ct_src_ltm           float64
+ct_srv_dst           float64
+is_sm_ips_ports      float64
+attack_cat               str
+label                float64
+
+Missing values:
+trans_depth          1
+response_body_len    1
+ct_srv_src           1
+ct_state_ttl         1
+ct_dst_ltm           1
+ct_src_dport_ltm     1
+ct_dst_sport_ltm     1
+ct_dst_src_ltm       1
+is_ftp_login         1
+ct_ftp_cmd           1
+ct_flw_http_mthd     1
+ct_src_ltm           1
+ct_srv_dst           1
+is_sm_ips_ports      1
+attack_cat           1
+label                1
+
+Duplicate rows:
+  0
+
+Binary label distribution:
+label
+0.0    51911
+1.0    40214
+NaN        1
+
+Attack category distribution:
+attack_cat
+Normal            51911
+Exploits          17041
+Fuzzers            9472
+DoS                5911
+Reconnaissance     5149
+Analysis           1116
+Backdoor            900
+Shellcode           562
+Worms                63
+NaN                   1
+
+Categorical columns:
+  - proto
+  - service
+  - state
+  - attack_cat
+
+======================================================================
+TESTING DATASET
+======================================================================
+File: C:\Users\ALTIRHAL TRAVELS\smart-campus-iot-ids\data\raw\UNSW_NB15_testing-set.csv
+Rows: 82332
+Columns: 45
+
+Columns:
+  - id
+  - dur
+  - proto
+  - service
+  - state
+  - spkts
+  - dpkts
+  - sbytes
+  - dbytes
+  - rate
+  - sttl
+  - dttl
+  - sload
+  - dload
+  - sloss
+  - dloss
+  - sinpkt
+  - dinpkt
+  - sjit
+  - djit
+  - swin
+  - stcpb
+  - dtcpb
+  - dwin
+  - tcprtt
+  - synack
+  - ackdat
+  - smean
+  - dmean
+  - trans_depth
+  - response_body_len
+  - ct_srv_src
+  - ct_state_ttl
+  - ct_dst_ltm
+  - ct_src_dport_ltm
+  - ct_dst_sport_ltm
+  - ct_dst_src_ltm
+  - is_ftp_login
+  - ct_ftp_cmd
+  - ct_flw_http_mthd
+  - ct_src_ltm
+  - ct_srv_dst
+  - is_sm_ips_ports
+  - attack_cat
+  - label
+
+Data types:
+id                     int64
+dur                  float64
+proto                    str
+service                  str
+state                    str
+spkts                  int64
+dpkts                  int64
+sbytes                 int64
+dbytes                 int64
+rate                 float64
+sttl                   int64
+dttl                   int64
+sload                float64
+dload                float64
+sloss                  int64
+dloss                  int64
+sinpkt               float64
+dinpkt               float64
+sjit                 float64
+djit                 float64
+swin                   int64
+stcpb                  int64
+dtcpb                  int64
+dwin                   int64
+tcprtt               float64
+synack               float64
+ackdat               float64
+smean                  int64
+dmean                  int64
+trans_depth            int64
+response_body_len      int64
+ct_srv_src             int64
+ct_state_ttl           int64
+ct_dst_ltm             int64
+ct_src_dport_ltm       int64
+ct_dst_sport_ltm       int64
+ct_dst_src_ltm         int64
+is_ftp_login           int64
+ct_ftp_cmd             int64
+ct_flw_http_mthd       int64
+ct_src_ltm             int64
+ct_srv_dst             int64
+is_sm_ips_ports        int64
+attack_cat               str
+label                  int64
+
+Missing values:
+  None
+
+Duplicate rows:
+  0
+
+Binary label distribution:
+label
+1    45332
+0    37000
+
+Attack category distribution:
+attack_cat
+Normal            37000
+Generic           18871
+Exploits          11132
+Fuzzers            6062
+DoS                4089
+Reconnaissance     3496
+Analysis            677
+Backdoor            583
+Shellcode           378
+Worms                44
+
+Categorical columns:
+  - proto
+  - service
+  - state
+  - attack_cat
+
