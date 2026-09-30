@@ -1,0 +1,2 @@
+model,features,criterion,ccp_alpha,train_samples,test_samples,accuracy,precision,recall,f1,true_negative,false_positive,false_negative,true_positive,tree_depth,tree_nodes,tree_leaves,training_time_seconds,test_prediction_time_seconds,mean_test_latency_ms,serialized_model_size_bytes,serialized_model_size_kb
+Ablation C - Full Pruned DT,194,gini,4.13333e-05,80912,56300,0.969449378330373,0.938885560215698,0.9743005181347151,0.9562652563059398,35776,1224,496,18804,18,401,201,1.0275977000128478,0.06955180002842098,0.001235378330877815,36153,35.3056640625

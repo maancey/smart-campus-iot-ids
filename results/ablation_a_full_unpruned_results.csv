@@ -1,0 +1,2 @@
+model,features,criterion,ccp_alpha,train_samples,test_samples,accuracy,precision,recall,f1,true_negative,false_positive,false_negative,true_positive,tree_depth,tree_nodes,tree_leaves,training_time_seconds,test_prediction_time_seconds,mean_test_latency_ms,serialized_model_size_bytes,serialized_model_size_kb
+Ablation A - Full Unpruned DT,194,gini,0.0,80912,56300,0.9620603907637656,0.9265407554671968,0.9659067357512954,0.9458143074581431,35522,1478,658,18642,32,1653,827,0.923888299963437,0.06997399998363107,0.0012428774419827899,136313,133.1181640625
