@@ -15,9 +15,9 @@ rank,feature
 14,djit
 15,spkts
 16,state_INT
-17,ct_dst_sport_ltm
-18,ct_dst_ltm
-19,ct_srv_dst
+17,ct_srv_dst
+18,ct_dst_sport_ltm
+19,ct_dst_ltm
 20,proto_unas
 21,ct_src_ltm
 22,ct_srv_src
@@ -25,8 +25,8 @@ rank,feature
 24,ct_dst_src_ltm
 25,response_body_len
 26,stcpb
-27,dtcpb
-28,dwin
+27,dwin
+28,dtcpb
 29,service_dns
 30,proto_tcp
 31,state_FIN
@@ -34,8 +34,8 @@ rank,feature
 33,ct_src_dport_ltm
 34,proto_ospf
 35,service_http
-36,ct_flw_http_mthd
-37,service_ssh
-38,service_pop3
-39,trans_depth
-40,proto_sctp
+36,service_ssh
+37,service_pop3
+38,proto_sctp
+39,ct_flw_http_mthd
+40,proto_arp

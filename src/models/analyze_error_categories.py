@@ -13,7 +13,7 @@ RESULTS_DIR = PROJECT_ROOT / "results"
 TEST_FEATURES_FILE = PROCESSED_DIR / "X_test_preprocessed.csv"
 TEST_SELECTED_FILE = PROCESSED_DIR / "test_selected.csv"
 FEATURES_FILE = MODEL_DIR / "final_selected_features.csv"
-MODEL_FILE = MODEL_DIR / "final_pruned_decision_tree.joblib"
+MODEL_FILE = MODEL_DIR / "ablation_d_selected_pruned.joblib"
 
 OUTPUT_FILE = RESULTS_DIR / "error_category_analysis.csv"
 

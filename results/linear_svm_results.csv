@@ -1,2 +1,2 @@
-model,random_state,train_samples,test_samples,features,accuracy,precision,recall,f1,true_negative,false_positive,false_negative,true_positive,training_time_seconds,test_prediction_time_seconds,mean_test_latency_ms,serialized_model_size_bytes,serialized_model_size_kb
-Linear SVM,42,80912,56300,40,0.8410834813499112,0.7056043214044565,0.9204663212435233,0.7988398498100142,29588,7412,1535,17765,1.6925713999662548,0.03059830004349351,0.0005434866792805241,3197,3.1220703125
+model,n_features,accuracy,precision,recall,f1,train_time_seconds,test_prediction_time_seconds,mean_latency_ms_per_sample,serialized_model_size_kb,tn,fp,fn,tp
+Linear SVM,40,0.7127353463587922,0.6247705689889075,0.40564766839378236,0.4919104018095567,0.7175652000587434,0.014767100103199482,0.00026229307465718444,1.7138671875,32298,4702,11471,7829

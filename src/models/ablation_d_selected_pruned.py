@@ -4,7 +4,7 @@ import time
 import joblib
 import pandas as pd
 
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
@@ -25,8 +25,11 @@ FEATURES = Path("models/final_selected_features.csv")
 MODEL_DIR = Path("models")
 RESULTS_DIR = Path("results")
 
-MODEL_PATH = MODEL_DIR / "random_forest_100.joblib"
-RESULTS_PATH = RESULTS_DIR / "random_forest_100_results.csv"
+MODEL_PATH = MODEL_DIR / "ablation_d_selected_pruned.joblib"
+RESULTS_PATH = RESULTS_DIR / "ablation_d_selected_pruned_results.csv"
+
+K = 40
+CCP_ALPHA = 0.0000413333
 
 
 def main():
@@ -36,33 +39,76 @@ def main():
 
     print("Loading data...")
 
-    X_train = pd.read_csv(TRAIN_X)
+    X_train_full = pd.read_csv(TRAIN_X)
     y_train = pd.read_csv(TRAIN_Y).iloc[:, 0]
 
-    X_test = pd.read_csv(TEST_X)
+    X_test_full = pd.read_csv(TEST_X)
     y_test = pd.read_csv(TEST_Y).iloc[:, 0]
 
-    # Use exactly the same 40 locked features
-    selected_features = pd.read_csv(FEATURES)["feature"].tolist()
-
-    X_train = X_train[selected_features]
-    X_test = X_test[selected_features]
-
-    print(f"Training data: {X_train.shape}")
-    print(f"Test data: {X_test.shape}")
-    print(f"Features: {len(selected_features)}")
+    print(f"Full training data: {X_train_full.shape}")
+    print(f"Full test data: {X_test_full.shape}")
 
     # --------------------------------------------------
-    # Random Forest baseline
+    # Load locked final 40-feature set
     # --------------------------------------------------
 
-    model = RandomForestClassifier(
-        n_estimators=100,
+    feature_df = pd.read_csv(FEATURES)
+
+    if "feature" not in feature_df.columns:
+        raise ValueError(
+            "final_selected_features.csv must contain a 'feature' column."
+        )
+
+    if "rank" in feature_df.columns:
+        feature_df = feature_df.sort_values("rank")
+
+    selected_features = feature_df["feature"].tolist()
+
+    if len(selected_features) != K:
+        raise ValueError(
+            f"Expected exactly {K} selected features, "
+            f"but found {len(selected_features)}."
+        )
+
+    missing_train = [
+        f for f in selected_features
+        if f not in X_train_full.columns
+    ]
+
+    missing_test = [
+        f for f in selected_features
+        if f not in X_test_full.columns
+    ]
+
+    if missing_train:
+        raise ValueError(
+            f"Missing selected features in training data: {missing_train}"
+        )
+
+    if missing_test:
+        raise ValueError(
+            f"Missing selected features in test data: {missing_test}"
+        )
+
+    X_train = X_train_full[selected_features]
+    X_test = X_test_full[selected_features]
+
+    print(f"\nLocked feature count: {len(selected_features)}")
+    print(f"Selected training data: {X_train.shape}")
+    print(f"Selected test data: {X_test.shape}")
+
+    # --------------------------------------------------
+    # Ablation D:
+    # Final 40 selected features + cost-complexity pruning
+    # --------------------------------------------------
+
+    model = DecisionTreeClassifier(
+        criterion="gini",
+        ccp_alpha=CCP_ALPHA,
         random_state=42,
-        n_jobs=-1,
     )
 
-    print("\nTraining Random Forest...")
+    print("\nTraining selected-feature pruned tree...")
 
     train_start = time.perf_counter()
 
@@ -76,7 +122,7 @@ def main():
     )
 
     # --------------------------------------------------
-    # Test prediction
+    # Test evaluation
     # --------------------------------------------------
 
     print("\nEvaluating on test set...")
@@ -120,10 +166,21 @@ def main():
     )
 
     # --------------------------------------------------
+    # Tree structure
+    # --------------------------------------------------
+
+    depth = model.get_depth()
+    nodes = model.tree_.node_count
+    leaves = model.get_n_leaves()
+
+    # --------------------------------------------------
     # Save model
     # --------------------------------------------------
 
-    joblib.dump(model, MODEL_PATH)
+    joblib.dump(
+        model,
+        MODEL_PATH
+    )
 
     model_size_bytes = MODEL_PATH.stat().st_size
     model_size_kb = model_size_bytes / 1024
@@ -133,13 +190,15 @@ def main():
     # --------------------------------------------------
 
     results = {
-        "model": "Random Forest",
-        "n_estimators": 100,
-        "random_state": 42,
+        "model": "Ablation D - Selected 40 Pruned DT",
+
+        "features": len(selected_features),
+
+        "criterion": "gini",
+        "ccp_alpha": CCP_ALPHA,
 
         "train_samples": len(X_train),
         "test_samples": len(X_test),
-        "features": len(selected_features),
 
         "accuracy": accuracy,
         "precision": precision,
@@ -150,6 +209,10 @@ def main():
         "false_positive": int(fp),
         "false_negative": int(fn),
         "true_positive": int(tp),
+
+        "tree_depth": depth,
+        "tree_nodes": nodes,
+        "tree_leaves": leaves,
 
         "training_time_seconds": training_time,
         "test_prediction_time_seconds": test_time,
@@ -169,7 +232,8 @@ def main():
     # --------------------------------------------------
 
     print("\n========================================")
-    print("RANDOM FOREST RESULTS")
+    print("ABLATION D RESULTS")
+    print("Selected 40 Features + Pruning")
     print("========================================")
 
     print(f"Accuracy : {accuracy:.6f}")
@@ -179,6 +243,11 @@ def main():
 
     print("\nConfusion matrix:")
     print(cm)
+
+    print("\nTree structure:")
+    print(f"Depth : {depth}")
+    print(f"Nodes : {nodes}")
+    print(f"Leaves: {leaves}")
 
     print("\nTiming:")
     print(

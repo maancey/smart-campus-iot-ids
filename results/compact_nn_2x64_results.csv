@@ -1,2 +1,2 @@
-model,architecture,activation,solver,random_state,train_samples,test_samples,features,accuracy,precision,recall,f1,true_negative,false_positive,false_negative,true_positive,training_time_seconds,test_prediction_time_seconds,mean_test_latency_ms,serialized_model_size_bytes,serialized_model_size_kb
-Compact Neural Network,64-64,ReLU,Adam,42,80912,56300,40,0.9374955595026643,0.8646088443232752,0.969481865284974,0.9140470433062211,34070,2930,589,18711,71.14772400003858,0.0922234000172466,0.0016380710482637052,232897,227.4384765625
+model,n_features,hidden_layers,accuracy,precision,recall,f1,train_time_seconds,test_prediction_time_seconds,mean_latency_ms_per_sample,serialized_model_size_kb,training_iterations,tn,fp,fn,tp
+Compact NN 2x64,40,"64,64",0.612753108348135,0.46777434312210203,0.940880829015544,0.6248795595320028,17.068551899981685,0.07823000010102987,0.0013895204280822357,223.5546875,46,16339,20661,1141,18159
