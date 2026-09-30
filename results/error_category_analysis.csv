@@ -1,0 +1,6 @@
+attack_category,total_samples,correctly_detected,missed_as_normal,false_positives,detection_rate
+Backdoor,583,577,6,0,0.9897084048027445
+DoS,4089,3975,114,0,0.9721203228173148
+Exploits,11132,10741,391,0,0.9648760330578512
+Normal,37000,35665,0,1335,0.9639189189189189
+Reconnaissance,3496,3424,72,0,0.9794050343249427
